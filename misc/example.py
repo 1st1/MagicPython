@@ -1,5 +1,6 @@
 import asyncio
 
+file() + unicode() + open() + `123`
 
 def showcase():
     """Some code to showcase the syntax.

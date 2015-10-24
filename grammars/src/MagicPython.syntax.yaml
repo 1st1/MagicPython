@@ -227,10 +227,10 @@ repository:
     comment: All valid Python expressions
     patterns:
       - include: '#backticks'
+        condition: python2
       - include: '#illegal-anno'
       - include: '#comments'
       - include: '#literal'
-      - include: '#regexp'
       - include: '#string'
       - include: '#lambda'
       - include: '#illegal-operator'
@@ -314,7 +314,6 @@ repository:
         beginCaptures:
           '1': {name: separator.continuation.line.python}
         patterns:
-          - include: '#regexp'
           - include: '#string'
 
   assignment-operator:
@@ -440,13 +439,6 @@ repository:
     captures:
       '2': {name: storage.type.number.python}
 
-  regexp:
-    patterns:
-      - include: '#regexp-single-quoted-multi-line'
-      - include: '#regexp-double-quoted-multi-line'
-      - include: '#regexp-single-quoted-single-line'
-      - include: '#regexp-double-quoted-single-line'
-
   regexp-single-quoted-single-line:
     name: string.regexp.quoted.single.python
     begin: \b(([uU]r)|([bB]r)|(r[bB]?))(\')
@@ -507,6 +499,15 @@ repository:
 
   string:
     patterns:
+      - include: '#regexp-single-quoted-multi-line'
+        condition: r_regex
+      - include: '#regexp-double-quoted-multi-line'
+        condition: r_regex
+      - include: '#regexp-single-quoted-single-line'
+        condition: r_regex
+      - include: '#regexp-double-quoted-single-line'
+        condition: r_regex
+
       - include: '#string-quoted-multi-line'
       - include: '#string-quoted-single-line'
       - include: '#string-bin-quoted-multi-line'
@@ -521,6 +522,7 @@ repository:
       - include: '#escape-sequence-unicode'
       - include: '#string-entity'
       - include: '#string-brace-formatting'
+        condition: format_formatting
 
   string-consume-escape:
     match: \\['"\n\\]
@@ -529,18 +531,22 @@ repository:
     patterns:
       - include: '#string-consume-escape'
       - include: '#string-formatting'
+        condition: percent_formatting
       - include: '#string-brace-formatting'
+        confition: format_formatting
 
   string-raw-bin-guts:
     patterns:
       - include: '#string-consume-escape'
       - include: '#string-formatting'
+        condition: percent_formatting
 
   string-entity:
     patterns:
       - include: '#escape-sequence'
       - include: '#string-line-continuation'
       - include: '#string-formatting'
+        condition: percent_formatting
 
   escape-sequence-unicode:
     patterns:
@@ -702,6 +708,7 @@ repository:
 
           - include: '#comments'
           - include: '#backticks'
+            condition: python2
           - include: '#illegal-anno'
           - include: '#lambda-parameter-with-default'
           - include: '#line-continuation'
@@ -1042,7 +1049,8 @@ repository:
               | setattr | sorted | sum | vars | zip
             )\b
 
-      - name: variable.legacy.builtin.python
+      - name: support.function.builtin.python
+        condition: python2
         match: |
           (?x)
             (?<!\.)\b(
@@ -1160,6 +1168,9 @@ repository:
       - name: invalid.illegal.operator.python
         comment: We don't want `!` to flash when we're typing `!=`
         match: '!\b'
+      - name: invalid.illegal.operator.python
+        match: '`'
+        condition: '!python2'
 
   illegal-object-name:
     comment: It's illegal to name class or function "True"

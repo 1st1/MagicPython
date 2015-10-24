@@ -271,6 +271,7 @@ repository:
     patterns: [
       {
         include: "#backticks"
+        condition: "python2"
       }
       {
         include: "#illegal-anno"
@@ -680,15 +681,19 @@ repository:
     patterns: [
       {
         include: "#regexp-single-quoted-multi-line"
+        condition: "r_regex"
       }
       {
         include: "#regexp-double-quoted-multi-line"
+        condition: "r_regex"
       }
       {
         include: "#regexp-single-quoted-single-line"
+        condition: "r_regex"
       }
       {
         include: "#regexp-double-quoted-single-line"
+        condition: "r_regex"
       }
       {
         include: "#string-quoted-multi-line"
@@ -725,6 +730,7 @@ repository:
       }
       {
         include: "#string-brace-formatting"
+        condition: "format_formatting"
       }
     ]
   "string-consume-escape":
@@ -736,6 +742,7 @@ repository:
       }
       {
         include: "#string-formatting"
+        condition: "percent_formatting"
       }
       {
         include: "#string-brace-formatting"
@@ -749,6 +756,7 @@ repository:
       }
       {
         include: "#string-formatting"
+        condition: "percent_formatting"
       }
     ]
   "string-entity":
@@ -761,6 +769,7 @@ repository:
       }
       {
         include: "#string-formatting"
+        condition: "percent_formatting"
       }
     ]
   "escape-sequence-unicode":
@@ -862,7 +871,7 @@ repository:
     '''
     match: '''
       (?x)
-        \\s* \\b(from)\\b (\\s*\\.+\\s*)
+        \\s* (from) (\\s*\\.+\\s*)
       
     '''
     captures:
@@ -1005,6 +1014,7 @@ repository:
           }
           {
             include: "#backticks"
+            condition: "python2"
           }
           {
             include: "#illegal-anno"
@@ -1543,6 +1553,7 @@ repository:
       }
       {
         name: "support.function.builtin.python"
+        condition: "python2"
         match: '''
           (?x)
             (?<!\\.)\\b(
@@ -1686,6 +1697,11 @@ repository:
         name: "invalid.illegal.operator.python"
         comment: "We don't want `!` to flash when we're typing `!=`"
         match: "!\\b"
+      }
+      {
+        name: "invalid.illegal.operator.python"
+        match: "`"
+        condition: "!python2"
       }
     ]
   "illegal-object-name":
@@ -2891,6 +2907,7 @@ repository:
     patterns: [
       {
         include: "#string-single-bad-brace-formatting-raw"
+        condition: "format_formatting"
       }
       {
         include: "#string-raw-guts"
@@ -2953,6 +2970,7 @@ repository:
     patterns: [
       {
         include: "#string-single-bad-brace-formatting-unicode"
+        condition: "format_formatting"
       }
       {
         include: "#string-unicode-guts"
@@ -3000,6 +3018,7 @@ repository:
       }
       {
         include: "#string-formatting"
+        condition: "percent_formatting"
       }
     ]
   "string-raw-quoted-multi-line":
@@ -3021,6 +3040,7 @@ repository:
     patterns: [
       {
         include: "#string-multi-bad-brace-formatting-raw"
+        condition: "format_formatting"
       }
       {
         include: "#string-raw-guts"
@@ -3083,6 +3103,7 @@ repository:
     patterns: [
       {
         include: "#string-multi-bad-brace-formatting-unicode"
+        condition: "format_formatting"
       }
       {
         include: "#string-unicode-guts"
@@ -3130,5 +3151,6 @@ repository:
       }
       {
         include: "#string-formatting"
+        condition: "percent_formatting"
       }
     ]

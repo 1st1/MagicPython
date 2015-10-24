@@ -427,6 +427,8 @@
           <dict>
             <key>include</key>
             <string>#backticks</string>
+            <key>condition</key>
+            <string>python2</string>
           </dict>
           <dict>
             <key>include</key>
@@ -1129,18 +1131,26 @@
           <dict>
             <key>include</key>
             <string>#regexp-single-quoted-multi-line</string>
+            <key>condition</key>
+            <string>r_regex</string>
           </dict>
           <dict>
             <key>include</key>
             <string>#regexp-double-quoted-multi-line</string>
+            <key>condition</key>
+            <string>r_regex</string>
           </dict>
           <dict>
             <key>include</key>
             <string>#regexp-single-quoted-single-line</string>
+            <key>condition</key>
+            <string>r_regex</string>
           </dict>
           <dict>
             <key>include</key>
             <string>#regexp-double-quoted-single-line</string>
+            <key>condition</key>
+            <string>r_regex</string>
           </dict>
           <dict>
             <key>include</key>
@@ -1191,6 +1201,8 @@
           <dict>
             <key>include</key>
             <string>#string-brace-formatting</string>
+            <key>condition</key>
+            <string>format_formatting</string>
           </dict>
         </array>
       </dict>
@@ -1210,6 +1222,8 @@
           <dict>
             <key>include</key>
             <string>#string-formatting</string>
+            <key>condition</key>
+            <string>percent_formatting</string>
           </dict>
           <dict>
             <key>include</key>
@@ -1230,6 +1244,8 @@
           <dict>
             <key>include</key>
             <string>#string-formatting</string>
+            <key>condition</key>
+            <string>percent_formatting</string>
           </dict>
         </array>
       </dict>
@@ -1248,6 +1264,8 @@
           <dict>
             <key>include</key>
             <string>#string-formatting</string>
+            <key>condition</key>
+            <string>percent_formatting</string>
           </dict>
         </array>
       </dict>
@@ -1381,7 +1399,7 @@ it&apos;s not tokenized as ellipsis.
 </string>
         <key>match</key>
         <string>(?x)
-  \s* \b(from)\b (\s*\.+\s*)
+  \s* (from) (\s*\.+\s*)
 </string>
         <key>captures</key>
         <dict>
@@ -1621,6 +1639,8 @@ it&apos;s not tokenized as ellipsis.
               <dict>
                 <key>include</key>
                 <string>#backticks</string>
+                <key>condition</key>
+                <string>python2</string>
               </dict>
               <dict>
                 <key>include</key>
@@ -2458,6 +2478,8 @@ it&apos;s not tokenized as ellipsis.
           <dict>
             <key>name</key>
             <string>support.function.builtin.python</string>
+            <key>condition</key>
+            <string>python2</string>
             <key>match</key>
             <string>(?x)
   (?&lt;!\.)\b(
@@ -2655,6 +2677,14 @@ indirectly through syntactic constructs
             <string>We don&apos;t want `!` to flash when we&apos;re typing `!=`</string>
             <key>match</key>
             <string>!\b</string>
+          </dict>
+          <dict>
+            <key>name</key>
+            <string>invalid.illegal.operator.python</string>
+            <key>match</key>
+            <string>`</string>
+            <key>condition</key>
+            <string>!python2</string>
           </dict>
         </array>
       </dict>
@@ -4952,6 +4982,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-single-bad-brace-formatting-raw</string>
+            <key>condition</key>
+            <string>format_formatting</string>
           </dict>
           <dict>
             <key>include</key>
@@ -5087,6 +5119,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-single-bad-brace-formatting-unicode</string>
+            <key>condition</key>
+            <string>format_formatting</string>
           </dict>
           <dict>
             <key>include</key>
@@ -5147,6 +5181,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-formatting</string>
+            <key>condition</key>
+            <string>percent_formatting</string>
           </dict>
         </array>
       </dict>
@@ -5194,6 +5230,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-multi-bad-brace-formatting-raw</string>
+            <key>condition</key>
+            <string>format_formatting</string>
           </dict>
           <dict>
             <key>include</key>
@@ -5329,6 +5367,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-multi-bad-brace-formatting-unicode</string>
+            <key>condition</key>
+            <string>format_formatting</string>
           </dict>
           <dict>
             <key>include</key>
@@ -5389,6 +5429,8 @@ indirectly through syntactic constructs
           <dict>
             <key>include</key>
             <string>#string-formatting</string>
+            <key>condition</key>
+            <string>percent_formatting</string>
           </dict>
         </array>
       </dict>
