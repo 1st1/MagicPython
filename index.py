@@ -10,7 +10,7 @@ SETTINGS = {
     'magicpython_python2': 'python2'
 }
 
-DEBUG = True
+DEBUG = False
 
 FLAGS = {}
 
@@ -150,9 +150,10 @@ class Compiler:
 
 
 def plugin_loaded():
-    global SETTINGS, FLAGS
+    global SETTINGS, FLAGS, DEBUG
 
     settings = sublime.load_settings("Preferences.sublime-settings")
+    DEBUG = settings.get('magicpython_debug', False)
 
     flags_fn = outFn = os.path.join(DIR, 'grammars', 'src', 'flags.json')
     f = open(flags_fn, 'r')
