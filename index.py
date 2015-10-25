@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import json
 import os
 import plistlib
@@ -28,9 +30,7 @@ class Compiler:
         self._debug = debug
 
     def log(self, *args):
-        new_args = ('MagicPython:',) + tuple(args) #py2 compat
-        if self._debug:
-            print(new_args)
+        print('MagicPython:', *args)
 
     def schedule_sync(self):
         if self._scheduled:
