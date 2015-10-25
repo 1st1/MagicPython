@@ -3,13 +3,36 @@
 all: devenv release
 
 test: release
-# Run python syntax tests
-	./node_modules/.bin/syntaxdev test --tests test/**/*.py \
+# Run default python syntax tests
+	./node_modules/.bin/syntaxdev test \
+				--tests test/common/**/*.py \
+				--tests test/py2/**/*.py \
+				--tests test/regex/**/*.py \
 				--syntax grammars/src/MagicPython.syntax.yaml \
 				--default-vars grammars/src/flags.json
 
+# Run python (-regexps) syntax tests
+	./node_modules/.bin/syntaxdev test \
+				--tests test/common/**/*.py \
+				--tests test/no_regex/**/*.py \
+				--tests test/py2/**/*.py \
+				--syntax grammars/src/MagicPython.syntax.yaml \
+				--default-vars grammars/src/flags.json \
+				--var-off r_regex
+
+# Run python (-regexps, -python2) syntax tests
+	./node_modules/.bin/syntaxdev test \
+				--tests test/common/**/*.py \
+				--tests test/no_regex/**/*.py \
+				--tests test/no_py2/**/*.py \
+				--syntax grammars/src/MagicPython.syntax.yaml \
+				--default-vars grammars/src/flags.json \
+				--var-off r_regex \
+				--var-off python2
+
 # Run regex syntax tests
-	./node_modules/.bin/syntaxdev test --tests test/**/*.re \
+	./node_modules/.bin/syntaxdev test \
+				--tests test/regex/**/*.re \
 				--syntax grammars/src/MagicRegExp.syntax.yaml
 
 # Check if the version specified in "package.json" matches the latest git tag
