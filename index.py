@@ -135,7 +135,7 @@ class Compiler:
             return
 
         add_on_change = lambda name: self._settings.add_on_change(
-            name, lambda: (print(name), self.schedule_sync()))
+            name, lambda: self.schedule_sync())
 
         for prop in SETTINGS:
             add_on_change(prop)
